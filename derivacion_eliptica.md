@@ -97,17 +97,67 @@ K(k)-F\!\left(
 
 Comprobaciones: $t^*(\theta_0)=0$ y, para $\theta=0$, (4) da el tiempo de caída. La expresión (4) reemplaza la ecuación (10) de la versión enviada inicialmente: la transformación de módulo de aquella ecuación, tal como estaba impresa, no conduce a (4).
 
-## 5. Evaluación numérica y alcance de la exactitud
+## 5. Evaluación numérica y precisión
 
-Para $L=3\,\mathrm m$, $g=9.81\,\mathrm{m/s^2}$ y $\theta_0=89^\circ$, (4) da aproximadamente $t^*(0)=2.36885626016\,\mathrm s$. MATLAB utiliza el **parámetro** $m=k^2=(1+\sin\theta_0)/2$ en `ellipticF(phi,m)` y `ellipticK(m)`, mientras que estas ecuaciones matemáticas usan el **módulo** $k$.
+Para \(L=3\,\mathrm m\), \(g=9.81\,\mathrm{m/s^2}\) y
+\(\theta_0=89^\circ\), la expresión elíptica (4) da un tiempo de
+caída próximo a \(2.36885626016\,\mathrm s\).
 
-La forma cerrada (4) es exacta **dentro de las hipótesis del modelo**; la evaluación por software es aproximada. Para cuantificar el error de una cuadratura hay que comparar sus resultados con una evaluación de mayor precisión y controlar la estabilización al aumentar la precisión de trabajo. La coincidencia entre dos resultados de doble precisión, por sí sola, no es una cota rigurosa del error. Cerca de $\theta_0$, la resta $K-F$ puede perder cifras por cancelación; para esos ángulos conviene emplear la integral regularizada o precisión aumentada.
+La evaluación puede realizarse en MATLAB mediante `ellipticK(m)` y
+`ellipticF(phi,m)` de Symbolic Math Toolbox [2, 3]. Estas funciones
+reciben el **parámetro** \(m=k^2=(1+\sin\theta_0)/2\), mientras que
+la notación matemática de las secciones anteriores utiliza el
+**módulo** \(k\).
 
-## Referencias para citar
+La documentación de `ellipticK` y `ellipticF` no establece una cota
+de error numérico para estas funciones ni garantiza que una cantidad
+determinada de cifras de su resultado sea correcta. Si reciben
+argumentos numéricos ordinarios, devuelven resultados de punto flotante.
+Si la expresión se construye desde el comienzo con datos simbólicos,
+`vpa` permite evaluarla con una cantidad especificada de cifras de
+trabajo [4]. Esto tampoco constituye, por sí solo, una cota rigurosa
+del error final.
 
-- NIST Digital Library of Mathematical Functions (DLMF), capítulo 19, [ecuación 19.2.4](https://dlmf.nist.gov/19.2.E4): definición de la integral elíptica incompleta de primera especie.
-- DLMF, [ecuación 19.2.8](https://dlmf.nist.gov/19.2.E8): relación entre integral completa e incompleta, $K(k)=F(\pi/2,k)$.
-- DLMF, [ecuación 19.7.4](https://dlmf.nist.gov/19.7.E4): transformación de módulo recíproco.
-- [Cómo citar la DLMF](https://dlmf.nist.gov/help/cite): entrada bibliográfica y formato de enlaces permanentes a ecuaciones.
+Para comprobar la estabilidad numérica de la referencia, se puede
+evaluar la misma expresión simbólica, por ejemplo, con 40 y 60 cifras
+de trabajo, comparar los resultados y contrastarlos además con una
+cuadratura refinada de la integral regularizada (16). El error de la
+cuadratura compuesta se estima comparando cada resultado con esa
+referencia de mayor precisión. En el artículo deben informarse la
+diferencia obtenida y únicamente los dígitos respaldados por estas
+comprobaciones.
+
+La expresión elíptica es exacta dentro del modelo ideal; tanto su
+evaluación decimal como la cuadratura de la integral son numéricas.
+Cerca de \(\theta_0\), la resta entre las integrales elípticas completa
+e incompleta puede perder cifras por cancelación, por lo que allí
+resulta conveniente usar la integral regularizada o aumentar la
+precisión de trabajo.
+
+## Referencias
+
+1. **NIST Digital Library of Mathematical Functions (DLMF).**
+   F. W. J. Olver et al. (eds.), National Institute of Standards and
+   Technology, versión 1.2.8, 15 de septiembre de 2026.
+   https://dlmf.nist.gov/
+   Ecuaciones utilizadas:
+   [19.2.4](https://dlmf.nist.gov/19.2.E4), definición de la integral
+   elíptica incompleta de primera especie;
+   [19.2.8](https://dlmf.nist.gov/19.2.E8), relación
+   \(K(k)=F(\pi/2,k)\); y
+   [19.7.4](https://dlmf.nist.gov/19.7.E4), transformación de módulo
+   recíproco.
+
+2. **MathWorks.** «ellipticK — Complete elliptic integral of the first
+   kind». Documentación de *Symbolic Math Toolbox*.
+   https://www.mathworks.com/help/symbolic/sym.elliptick.html
+
+3. **MathWorks.** «ellipticF — Incomplete elliptic integral of the first
+   kind». Documentación de *Symbolic Math Toolbox*.
+   https://www.mathworks.com/help/symbolic/sym.ellipticf.html
+
+4. **MathWorks.** «vpa — Variable-precision arithmetic».
+   Documentación de *Symbolic Math Toolbox*.
+   https://www.mathworks.com/help/symbolic/sym.vpa.html
 
 El desplazamiento $x=\pi/4+s/2$ y la aplicación a la barra se **derivan aquí** a partir de la identidad trigonométrica y de la forma canónica de 19.2.4; no se atribuyen como una fórmula específica publicada en la DLMF.
