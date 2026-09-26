@@ -106,14 +106,14 @@ mientras que la integral incompleta \(F(\varphi\mid m)\) se obtuvo
 invirtiendo numéricamente la relación
 
 ```math
-\operatorname{sn}\!\left(F(\varphi\mid m)\mid m\right)=\sin\varphi.
+\mathrm{sn}\!\left(F(\varphi\mid m)\mid m\right)=\sin\varphi.
 ```
 
 Para ello se evaluó la función elíptica de Jacobi mediante `ellipj` y
 se resolvió la ecuación
 
 ```math
-\operatorname{sn}(u\mid m)-\sin\varphi=0
+\mathrm{sn}(u\mid m)-\sin\varphi=0
 ```
 
 con `fzero` en el intervalo \(0\leq u\leq K(m)\) [3–5]. En estas
@@ -136,19 +136,19 @@ del tiempo final, ya que el cálculo también incluye la determinación
 de los argumentos, la inversión mediante `fzero` y la resta entre las
 integrales completa e incompleta.
 
-La precisión de la referencia se comprobó de manera independiente con
-la biblioteca `mpmath` de Python, que permite trabajar con precisión
-decimal arbitraria [2]. Los parámetros \(g=9.81\),
+Como verificación independiente, el tiempo de caída se evaluó también
+con la biblioteca `mpmath` de Python, que permite trabajar con
+precisión decimal arbitraria [2]. Los parámetros \(g=9.81\),
 \(L=3\) y \(\theta_0=89\pi/180\) se construyeron directamente con
 precisión variable, evitando su redondeo previo en aritmética de doble
-precisión. Se realizaron dos cálculos independientes:
+precisión. Se utilizaron dos procedimientos:
 
-1. la evaluación de la expresión elíptica mediante `ellipk` y `ellipf`;
-2. la evaluación de la integral de tiempo regularizada mediante
-   cuadratura adaptativa con `quad`.
+1. evaluación de la expresión elíptica mediante `ellipk` y `ellipf`;
+2. evaluación de la integral de tiempo regularizada mediante la
+   cuadratura adaptativa implementada en `quad`.
 
 Ambos procedimientos se ejecutaron con 40 y 60 cifras decimales de
-trabajo y proporcionaron, en las cifras mostradas,
+trabajo y proporcionaron
 
 ```math
 t^*(0)=
@@ -156,18 +156,19 @@ t^*(0)=
 \mathrm{s}.
 ```
 
-La diferencia entre el resultado de MATLAB en doble precisión y esta
-referencia fue aproximadamente
+La diferencia entre el resultado obtenido en MATLAB con doble
+precisión y la evaluación de alta precisión fue aproximadamente
 
 ```math
 4.5\times10^{-14}\ \mathrm{s}.
 ```
 
-El procedimiento completo se encuentra en el archivo
-[`referencia_alta_precision.py`](referencia_alta_precision.py) del
-repositorio. La expresión elíptica es exacta dentro de las hipótesis
-del modelo ideal; su evaluación decimal y las distintas reglas de
-cuadratura son aproximaciones numéricas.
+El archivo
+[`referencia_alta_precision.py`](referencia_alta_precision.py)
+contiene ambos procedimientos y permite repetir la comparación
+modificando la cantidad de cifras de trabajo. La expresión elíptica es
+exacta dentro de las hipótesis del modelo ideal; sus evaluaciones
+decimales y las reglas de cuadratura son aproximaciones numéricas.
 
 ## Referencias
 
