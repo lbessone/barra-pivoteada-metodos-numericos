@@ -21,8 +21,7 @@ Esta expresión es exacta dentro del modelo. Su valor decimal debe evaluarse num
 
 ## 2. Elección del cambio de variable
 
-El cambio de variable utilizado a continuación no se propone de manera
-arbitraria. Se obtiene comparando el integrando de (1) con la forma
+El cambio de variable utilizado a continuación se obtiene comparando el integrando de (1) con la forma
 canónica de la integral elíptica incompleta de primera especie.
 
 La definición de Legendre es [DLMF, 19.2.4](https://dlmf.nist.gov/19.2.E4):
@@ -42,7 +41,7 @@ de la forma
 C\left(1-k^2\sin^2x\right),
 ```
 
-donde \(C\) sea una constante respecto de la variable de integración.
+donde $C$ sea una constante respecto de la variable de integración.
 
 En la integral de tiempo (1), el término que debe transformarse es
 
@@ -50,12 +49,12 @@ En la integral de tiempo (1), el término que debe transformarse es
 \sin\theta_0-\sin s.
 ```
 
-La dificultad es que aparece \(\sin s\), mientras que en la forma de
-Legendre aparece \(\sin^2x\). Esto sugiere utilizar una identidad de
+La dificultad es que aparece $\sin s$, mientras que en la forma de
+Legendre aparece $\sin^2x$. Esto sugiere utilizar una identidad de
 ángulo doble que permita expresar un seno como una función trigonométrica
 al cuadrado.
 
-### 2.1. Conversión de \(\sin s\) en un seno al cuadrado
+### 2.1. Conversión de $\sin s$ en un seno al cuadrado
 
 Comenzamos con la identidad
 
@@ -75,14 +74,14 @@ puede escribirse como
 -\cos(2x)=2\sin^2x-1.
 ```
 
-Para que esta última expresión reproduzca \(\sin s\), igualamos los
+Para que esta última expresión reproduzca $\sin s$, igualamos los
 argumentos de los cosenos:
 
 ```math
 2x=\frac{\pi}{2}+s.
 ```
 
-Despejando \(x\), se obtiene
+Despejando $x$, se obtiene
 
 ```math
 x=\frac{\pi}{4}+\frac{s}{2}.
@@ -109,17 +108,13 @@ Ahora puede verificarse directamente la identidad buscada:
 ```
 
 De forma equivalente, sustituyendo
-\(x=\pi/4+s/2\), se obtiene
+$x=\pi/4+s/2$, se obtiene
 
 ```math
 \sin s
 =
 2\sin^2\left(\frac{\pi}{4}+\frac{s}{2}\right)-1.
 ```
-
-Así se explica el origen del término \(\pi/4\): aparece al dividir
-entre dos el desplazamiento angular \(\pi/2+s\) necesario para
-convertir \(\sin s\) en \(-\cos(2x)\).
 
 ### 2.2. Transformación del denominador
 
@@ -129,7 +124,7 @@ Para simplificar la notación, definimos
 a=\sin\theta_0.
 ```
 
-Usando \(\sin s=2\sin^2x-1\), la diferencia que aparece en el
+Usando $\sin s=2\sin^2x-1$, la diferencia que aparece en el
 denominador de (1) se transforma de la siguiente manera:
 
 ```math
@@ -140,7 +135,7 @@ denominador de (1) se transforma de la siguiente manera:
 \end{aligned}
 ```
 
-Extraemos ahora el factor constante \(1+a\):
+Extraemos ahora el factor constante $1+a$:
 
 ```math
 \begin{aligned}
@@ -167,15 +162,15 @@ Por lo tanto,
 \left(1-k_1^2\sin^2x\right).
 ```
 
-El módulo \(k_1\) queda dado por
+El módulo $k_1$ queda dado por
 
 ```math
 k_1=
 \sqrt{\frac{2}{1+\sin\theta_0}}.
 ```
 
-Como \(0<\theta_0<\pi/2\), se cumple
-\(0<\sin\theta_0<1\), de modo que
+Como $0<\theta_0<\pi/2$, se cumple
+$0<\sin\theta_0<1$, de modo que
 
 ```math
 k_1>1.
@@ -195,13 +190,13 @@ x=\frac{\pi}{4}+\frac{s}{2}
 
 también modifica los límites de integración.
 
-Para el límite inferior \(s=\theta\),
+Para el límite inferior $s=\theta$,
 
 ```math
 x=\frac{\pi}{4}+\frac{\theta}{2}.
 ```
 
-Para el límite superior \(s=\theta_0\),
+Para el límite superior $s=\theta_0$,
 
 ```math
 x=\frac{\pi}{4}+\frac{\theta_0}{2}.
@@ -263,7 +258,7 @@ t^*(\theta)=
 }}.
 ```
 
-Las cantidades que no dependen de \(x\) pueden extraerse de la
+Las cantidades que no dependen de $x$ pueden extraerse de la
 integral. Como
 
 ```math
@@ -341,65 +336,162 @@ Comprobaciones: $t^*(\theta_0)=0$ y, para $\theta=0$, (4) da el tiempo de caída
 
 ## 5. Evaluación numérica y precisión
 
-Para $L=3 \mathrm{m}$, $g=9.81 \mathrm{m/s^2}$ y
-$\theta_0=89^\circ$, la expresión elíptica (4) se evaluó en MATLAB
-R2015. La integral completa $K(m)$ se calculó mediante `ellipke(m)`,
-mientras que la integral incompleta $F(\varphi\mid m)$ se obtuvo
-invirtiendo numéricamente la relación
+En la derivación anterior se utilizó la notación $F(\varphi,k)$, en
+la cual el segundo argumento es el **módulo** $k$. Las rutinas
+numéricas empleadas en esta sección utilizan, en cambio, el
+**parámetro**
 
 ```math
-\mathrm{sn}\!\left(F(\varphi\mid m)\mid m\right)=\sin\varphi.
+m=k^2.
 ```
 
-Para ello se evaluó la función elíptica de Jacobi mediante `ellipj` y
-se resolvió la ecuación
+Por este motivo, en esta sección se escribe $F(\varphi\mid m)$. Ambas
+notaciones representan la misma integral y se relacionan mediante
 
 ```math
-\mathrm{sn}(u\mid m)-\sin\varphi=0
+F(\varphi\mid m)=F(\varphi,\sqrt{m}).
 ```
 
-con `fzero` en el intervalo $0\leq u\leq K(m)$ [3–5]. En estas
-rutinas, MATLAB recibe el parámetro
+En términos del parámetro $m$, la expresión elíptica (4) puede
+escribirse como
 
 ```math
-m=k^2=\frac{1+\sin\theta_0}{2}.
+t^*(\theta)
+=
+\frac{1}{\omega_0}
+\left[
+K(m)-F(\varphi\mid m)
+\right],
 ```
 
-El resultado obtenido fue
+donde
+
+```math
+m=\frac{1+\sin\theta_0}{2}
+```
+
+y
+
+```math
+\varphi
+=
+\arcsin
+\sqrt{
+\frac{1+\sin\theta}
+     {1+\sin\theta_0}
+}.
+```
+
+Para calcular el tiempo total de caída se toma $\theta=0$, por lo que
+
+```math
+\varphi
+=
+\arcsin
+\sqrt{
+\frac{1}
+     {1+\sin\theta_0}
+}.
+```
+
+### 5.1. Evaluación en MATLAB
+
+Para $L=3\,\mathrm{m}$, $g=9.81\,\mathrm{m/s^2}$ y
+$\theta_0=89^\circ$, la expresión anterior se evaluó en MATLAB R2015.
+
+La integral elíptica completa $K(m)$ se calculó directamente mediante
+la función `ellipke(m)`. Para calcular la integral incompleta
+$F(\varphi\mid m)$ se utilizó su relación con el seno elíptico de
+Jacobi, denotado por $\mathrm{sn}(u\mid m)$.
+
+Esta función se define como la inversa de la integral elíptica en el
+siguiente sentido: si
+
+```math
+u=F(\varphi\mid m),
+```
+
+entonces
+
+```math
+\mathrm{sn}(u\mid m)=\sin\varphi.
+```
+
+Por lo tanto, calcular $F(\varphi\mid m)$ equivale a encontrar el valor
+de $u$ que satisface
+
+```math
+\mathrm{sn}(u\mid m)-\sin\varphi=0.
+```
+
+MATLAB evalúa el seno elíptico de Jacobi mediante `ellipj(u,m)`. El
+primer valor devuelto por esta función corresponde a
+$\mathrm{sn}(u\mid m)$. La ecuación anterior se resolvió con `fzero`
+en el intervalo
+
+```math
+0\leq u\leq K(m).
+```
+
+El valor obtenido para la raíz es precisamente
+
+```math
+u=F(\varphi\mid m).
+```
+
+Finalmente, el tiempo de caída se calculó mediante
+
+```math
+t^*(0)
+=
+\frac{K(m)-F(\varphi\mid m)}{\omega_0},
+\qquad
+\omega_0=\sqrt{\frac{3g}{2L}}.
+```
+
+El resultado obtenido en MATLAB fue
 
 ```math
 t^*(0)=2.368856260163897\ \mathrm{s}.
 ```
 
 Las funciones `ellipke` y `ellipj` emplean `eps` como tolerancia
-predeterminada [3,4]. Esta tolerancia corresponde a los criterios
-internos de las rutinas y no constituye por sí sola una cota del error
-del tiempo final, ya que el cálculo también incluye la determinación
-de los argumentos, la inversión mediante `fzero` y la resta entre las
-integrales completa e incompleta.
+predeterminada [3,4]. Este valor corresponde al criterio interno de
+convergencia de esas rutinas. El cálculo completo también incluye la
+resolución de una ecuación mediante `fzero`, la evaluación de los
+argumentos y la resta $K(m)-F(\varphi\mid m)$; por ello, `eps` no debe
+interpretarse directamente como una cota del error absoluto del
+tiempo final.
 
-Como verificación independiente, el tiempo de caída se evaluó también
-con la biblioteca `mpmath` de Python, que permite trabajar con
-precisión decimal arbitraria [2]. Los parámetros $g=9.81$,
-$L=3$ y $\theta_0=89\pi/180$ se construyeron directamente con
-precisión variable, evitando su redondeo previo en aritmética de doble
-precisión. Se utilizaron dos procedimientos:
+### 5.2. Evaluación independiente con precisión aumentada
 
-1. evaluación de la expresión elíptica mediante `ellipk` y `ellipf`;
-2. evaluación de la integral de tiempo regularizada mediante la
-   cuadratura adaptativa implementada en `quad`.
+El tiempo de caída también se evaluó con la biblioteca `mpmath` de
+Python, que permite efectuar operaciones con una cantidad configurable
+de cifras decimales [2].
 
-Ambos procedimientos se ejecutaron con 40 y 60 cifras decimales de
-trabajo y proporcionaron
+Los valores $g=9.81$, $L=3$ y $\theta_0=89\pi/180$ se construyeron
+directamente con precisión variable. De esta manera se evitó introducir
+una aproximación previa en doble precisión antes de efectuar el
+cálculo.
+
+Se emplearon dos procedimientos diferentes:
+
+1. evaluación de la expresión elíptica mediante las funciones
+   `ellipk` y `ellipf`;
+2. evaluación directa de la integral de tiempo regularizada mediante
+   la cuadratura adaptativa implementada en `quad`.
+
+Los dos procedimientos se ejecutaron primero con 40 y luego con 60
+cifras decimales de trabajo. En ambos casos se obtuvo
 
 ```math
 t^*(0)=
-2.368856260163852083758156203422299209205365623740850068\ldots\
-\mathrm{s}.
+2.368856260163852083758156203422299209205365623740850068
+\ldots\ \mathrm{s}.
 ```
 
-La diferencia entre el resultado obtenido en MATLAB con doble
-precisión y la evaluación de alta precisión fue aproximadamente
+La diferencia entre este valor y el obtenido en MATLAB con aritmética
+de doble precisión fue aproximadamente
 
 ```math
 4.5\times10^{-14}\ \mathrm{s}.
@@ -407,10 +499,12 @@ precisión y la evaluación de alta precisión fue aproximadamente
 
 El archivo
 [`referencia_alta_precision.py`](referencia_alta_precision.py)
-contiene ambos procedimientos y permite repetir la comparación
-modificando la cantidad de cifras de trabajo. La expresión elíptica es
-exacta dentro de las hipótesis del modelo ideal; sus evaluaciones
-decimales y las reglas de cuadratura son aproximaciones numéricas.
+contiene los dos procedimientos y permite repetir la evaluación
+modificando la cantidad de cifras decimales de trabajo.
+
+La expresión elíptica es exacta dentro de las hipótesis del modelo
+ideal. Los valores decimales producidos por MATLAB, `mpmath` o una
+regla de cuadratura son evaluaciones numéricas de esa expresión.
 
 ## Referencias
 
