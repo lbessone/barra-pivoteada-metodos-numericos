@@ -549,3 +549,13 @@ regla de cuadratura son evaluaciones numéricas de esa expresión.
    https://www.mathworks.com/help/matlab/ref/fzero.html
 
 El desplazamiento $x=\pi/4+s/2$ y la aplicación a la barra se **derivan aquí** a partir de la identidad trigonométrica y de la forma canónica de 19.2.4; no se atribuyen como una fórmula específica publicada en la DLMF.
+
+## Uso de herramientas de inteligencia artificial
+
+Durante la preparación de este material se utilizó ChatGPT
+(OpenAI, modelo GPT-5.6) como herramienta de apoyo para la revisión
+de la redacción, la organización de la documentación y la comprobación
+de desarrollos matemáticos y códigos numéricos. Los autores revisaron
+y verificaron de manera independiente todos los contenidos, cálculos,
+referencias y resultados presentados, y asumen la responsabilidad
+integral por la versión final.
