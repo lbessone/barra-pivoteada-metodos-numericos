@@ -99,7 +99,7 @@ Comprobaciones: $t^*(\theta_0)=0$ y, para $\theta=0$, (4) da el tiempo de caída
 
 ## 5. Evaluación numérica y precisión
 
-Para \(L=3\,\mathrm{m}\), \(g=9.81\,\mathrm{m/s^2}\) y
+Para $\(L=3\,\mathrm{m}\)$, $\(g=9.81\,\mathrm{m/s^2}\)$ y
 \(\theta_0=89^\circ\), la expresión elíptica (4) se evaluó en MATLAB
 R2015. La integral completa \(K(m)\) se calculó mediante `ellipke(m)`,
 mientras que la integral incompleta \(F(\varphi\mid m)\) se obtuvo
