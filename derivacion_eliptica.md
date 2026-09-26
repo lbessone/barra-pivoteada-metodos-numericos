@@ -99,10 +99,10 @@ Comprobaciones: $t^*(\theta_0)=0$ y, para $\theta=0$, (4) da el tiempo de caída
 
 ## 5. Evaluación numérica y precisión
 
-Para $\(L=3\,\mathrm{m}\)$, $\(g=9.81\,\mathrm{m/s^2}\)$ y
-\(\theta_0=89^\circ\), la expresión elíptica (4) se evaluó en MATLAB
-R2015. La integral completa \(K(m)\) se calculó mediante `ellipke(m)`,
-mientras que la integral incompleta \(F(\varphi\mid m)\) se obtuvo
+Para $L=3 \mathrm{m}$, $g=9.81 \mathrm{m/s^2}$ y
+$\theta_0=89^\circ$, la expresión elíptica (4) se evaluó en MATLAB
+R2015. La integral completa $K(m)$ se calculó mediante `ellipke(m)`,
+mientras que la integral incompleta $F(\varphi\mid m)$ se obtuvo
 invirtiendo numéricamente la relación
 
 ```math
@@ -116,7 +116,7 @@ se resolvió la ecuación
 \mathrm{sn}(u\mid m)-\sin\varphi=0
 ```
 
-con `fzero` en el intervalo \(0\leq u\leq K(m)\) [3–5]. En estas
+con `fzero` en el intervalo $0\leq u\leq K(m)$ [3–5]. En estas
 rutinas, MATLAB recibe el parámetro
 
 ```math
@@ -138,8 +138,8 @@ integrales completa e incompleta.
 
 Como verificación independiente, el tiempo de caída se evaluó también
 con la biblioteca `mpmath` de Python, que permite trabajar con
-precisión decimal arbitraria [2]. Los parámetros \(g=9.81\),
-\(L=3\) y \(\theta_0=89\pi/180\) se construyeron directamente con
+precisión decimal arbitraria [2]. Los parámetros $g=9.81$,
+$L=3$ y $\theta_0=89\pi/180$ se construyeron directamente con
 precisión variable, evitando su redondeo previo en aritmética de doble
 precisión. Se utilizaron dos procedimientos:
 
