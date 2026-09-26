@@ -19,34 +19,276 @@ t^*(\theta)=\int_{\theta}^{\theta_0}
 
 Esta expresión es exacta dentro del modelo. Su valor decimal debe evaluarse numéricamente.
 
-## 2. Cómo elegir el cambio de variable
+## 2. Elección del cambio de variable
 
-La forma estándar de Legendre contiene $1-k^2\sin^2 x$ bajo una raíz cuadrada [DLMF, 19.2.4](https://dlmf.nist.gov/19.2.E4). En (1) aparece $\sin s$ sin elevar al cuadrado. Para llevarlo a la forma estándar, se usa la siguiente identidad para el ángulo doble
+El cambio de variable utilizado a continuación no se propone de manera
+arbitraria. Se obtiene comparando el integrando de (1) con la forma
+canónica de la integral elíptica incompleta de primera especie.
+
+La definición de Legendre es [DLMF, 19.2.4](https://dlmf.nist.gov/19.2.E4):
 
 ```math
-\sin s=-\cos\!\left(\frac\pi2+s\right)
-=2\sin^2\!\left(\frac\pi4+\frac{s}{2}\right)-1.
+F(\varphi,k)
+=
+\int_0^\varphi
+\frac{dx}{\sqrt{1-k^2\sin^2x}}.
 ```
 
-Esto **motiva** el cambio
+Por lo tanto, para reconocer una integral elíptica de primera especie,
+el término que aparece dentro de la raíz debe llevarse a una expresión
+de la forma
 
 ```math
-x=\frac\pi4+\frac{s}{2},\qquad ds=2\,dx.
+C\left(1-k^2\sin^2x\right),
 ```
 
-El término $\pi/4$ proviene de dividir entre dos el desplazamiento $\pi/2$ de la identidad anterior. Si $a=\sin\theta_0$ y $k_1^2=2/(1+a)$, entonces
+donde \(C\) sea una constante respecto de la variable de integración.
+
+En la integral de tiempo (1), el término que debe transformarse es
 
 ```math
-a-\sin s=(1+a)-2\sin^2x=(1+a)(1-k_1^2\sin^2x).
+\sin\theta_0-\sin s.
 ```
 
-Los límites $s=\theta$ y $s=\theta_0$ pasan a $x=\pi/4+\theta/2$ y $x=\pi/4+\theta_0/2$. Así se obtiene la **ecuación (2)**:
+La dificultad es que aparece \(\sin s\), mientras que en la forma de
+Legendre aparece \(\sin^2x\). Esto sugiere utilizar una identidad de
+ángulo doble que permita expresar un seno como una función trigonométrica
+al cuadrado.
+
+### 2.1. Conversión de \(\sin s\) en un seno al cuadrado
+
+Comenzamos con la identidad
 
 ```math
-t^*(\theta)=\frac{\sqrt2}{\omega_0\sqrt{1+a}}
+\sin s=-\cos\left(\frac{\pi}{2}+s\right).
+```
+
+Por otra parte, la identidad del ángulo doble
+
+```math
+\cos(2x)=1-2\sin^2x
+```
+
+puede escribirse como
+
+```math
+-\cos(2x)=2\sin^2x-1.
+```
+
+Para que esta última expresión reproduzca \(\sin s\), igualamos los
+argumentos de los cosenos:
+
+```math
+2x=\frac{\pi}{2}+s.
+```
+
+Despejando \(x\), se obtiene
+
+```math
+x=\frac{\pi}{4}+\frac{s}{2}.
+```
+
+De esta igualdad también resulta
+
+```math
+s=2x-\frac{\pi}{2},
+\qquad
+ds=2\,dx.
+```
+
+Ahora puede verificarse directamente la identidad buscada:
+
+```math
+\sin s
+=
+\sin\left(2x-\frac{\pi}{2}\right)
+=
+-\cos(2x)
+=
+2\sin^2x-1.
+```
+
+De forma equivalente, sustituyendo
+\(x=\pi/4+s/2\), se obtiene
+
+```math
+\sin s
+=
+2\sin^2\left(\frac{\pi}{4}+\frac{s}{2}\right)-1.
+```
+
+Así se explica el origen del término \(\pi/4\): aparece al dividir
+entre dos el desplazamiento angular \(\pi/2+s\) necesario para
+convertir \(\sin s\) en \(-\cos(2x)\).
+
+### 2.2. Transformación del denominador
+
+Para simplificar la notación, definimos
+
+```math
+a=\sin\theta_0.
+```
+
+Usando \(\sin s=2\sin^2x-1\), la diferencia que aparece en el
+denominador de (1) se transforma de la siguiente manera:
+
+```math
+\begin{aligned}
+\sin\theta_0-\sin s
+&=a-\left(2\sin^2x-1\right)\\
+&=1+a-2\sin^2x.
+\end{aligned}
+```
+
+Extraemos ahora el factor constante \(1+a\):
+
+```math
+\begin{aligned}
+1+a-2\sin^2x
+&=(1+a)\left(
+1-\frac{2}{1+a}\sin^2x
+\right).
+\end{aligned}
+```
+
+Esta expresión ya tiene la estructura de Legendre. Definimos entonces
+
+```math
+k_1^2=\frac{2}{1+a}
+      =\frac{2}{1+\sin\theta_0}.
+```
+
+Por lo tanto,
+
+```math
+\sin\theta_0-\sin s
+=
+(1+\sin\theta_0)
+\left(1-k_1^2\sin^2x\right).
+```
+
+El módulo \(k_1\) queda dado por
+
+```math
+k_1=
+\sqrt{\frac{2}{1+\sin\theta_0}}.
+```
+
+Como \(0<\theta_0<\pi/2\), se cumple
+\(0<\sin\theta_0<1\), de modo que
+
+```math
+k_1>1.
+```
+
+Esta es la razón por la cual, después de identificar la integral
+elíptica, será conveniente aplicar una transformación de módulo
+recíproco.
+
+### 2.3. Transformación de los límites
+
+El cambio
+
+```math
+x=\frac{\pi}{4}+\frac{s}{2}
+```
+
+también modifica los límites de integración.
+
+Para el límite inferior \(s=\theta\),
+
+```math
+x=\frac{\pi}{4}+\frac{\theta}{2}.
+```
+
+Para el límite superior \(s=\theta_0\),
+
+```math
+x=\frac{\pi}{4}+\frac{\theta_0}{2}.
+```
+
+En consecuencia,
+
+```math
+s=\theta
+\quad\longrightarrow\quad
+x=\frac{\pi}{4}+\frac{\theta}{2},
+```
+
+y
+
+```math
+s=\theta_0
+\quad\longrightarrow\quad
+x=\frac{\pi}{4}+\frac{\theta_0}{2}.
+```
+
+### 2.4. Sustitución completa en la integral de tiempo
+
+Partimos de la ecuación (1):
+
+```math
+t^*(\theta)=
+\int_{\theta}^{\theta_0}
+\frac{ds}
+{\sqrt{2\omega_0^2
+\left(\sin\theta_0-\sin s\right)}}.
+```
+
+Sustituyendo
+
+```math
+ds=2\,dx
+```
+
+y
+
+```math
+\sin\theta_0-\sin s
+=
+(1+\sin\theta_0)
+\left(1-k_1^2\sin^2x\right),
+```
+
+resulta
+
+```math
+t^*(\theta)=
 \int_{\pi/4+\theta/2}^{\pi/4+\theta_0/2}
-\frac{dx}{\sqrt{1-k_1^2\sin^2x}}. 
+\frac{2\,dx}
+{\sqrt{
+2\omega_0^2
+(1+\sin\theta_0)
+\left(1-k_1^2\sin^2x\right)
+}}.
 ```
+
+Las cantidades que no dependen de \(x\) pueden extraerse de la
+integral. Como
+
+```math
+\frac{2}{\sqrt{2}}=\sqrt{2},
+```
+
+obtenemos
+
+**Ecuación (2).**
+
+```math
+t^*(\theta)=
+\frac{\sqrt{2}}
+{\omega_0\sqrt{1+\sin\theta_0}}
+\int_{\pi/4+\theta/2}^{\pi/4+\theta_0/2}
+\frac{dx}{\sqrt{1-k_1^2\sin^2x}},
+\qquad
+k_1^2=
+\frac{2}{1+\sin\theta_0}.
+```
+
+El integrando tiene ahora exactamente la forma que define la integral
+elíptica incompleta de primera especie. La aparición de esa función no
+es una suposición adicional: resulta de transformar el denominador de
+la integral de tiempo hasta llevarlo a la forma canónica de Legendre.
 
 ## 3. Identificación con la integral elíptica
 
