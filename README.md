@@ -69,3 +69,10 @@ disipación. Sus valores decimales, la cuadratura de Gauss–Legendre
 y los resultados de Euler y RK4 se obtienen numéricamente. Los
 datos experimentales también están sujetos a incertidumbres de
 medición y a diferencias entre el dispositivo real y el modelo ideal.
+
+## Autores
+
+José Di-Laccio, Lucas Bessone y Julián Ramos.
+
+© 2026 José Di-Laccio, Lucas Bessone y Julián Ramos.
+Todos los derechos reservados.
