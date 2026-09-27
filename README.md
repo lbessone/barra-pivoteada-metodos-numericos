@@ -9,11 +9,11 @@ libre: métodos numéricos en contexto».
   derivación de la solución implícita del modelo en términos de
   integrales elípticas y transformación de módulo recíproco.
 
-- `referencia_alta_precision.py`: comprobación independiente del
+- [`referencia_alta_precision.py`](referencia_alta_precision.py): comprobación independiente del
   tiempo de caída mediante la expresión elíptica y la cuadratura
   de la integral regularizada, utilizando `mpmath`.
 
-- `codigos_matlab/`: códigos para generar las figuras del artículo
+- [`codigos_matlab/`](codigos_matlab/): códigos para generar las figuras del artículo
   y realizar las comprobaciones numéricas. Las funciones auxiliares
   necesarias se encuentran en la misma carpeta.
 
